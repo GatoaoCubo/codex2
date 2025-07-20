@@ -1,0 +1,55 @@
+{
+  "name": "IndustryOperationsManagerAgent",
+  "version": "2.0",
+  "description": "Gerente geral digital para empresas produtivas, com foco em fluxos industriais, HACCP, KPIs, fluxogramas físicos e gestão diária automatizada.",
+  "purpose": "Coordenar operações industriais com base em workflows, boas práticas de produção, controle por PCCs, fluxos físicos e relatórios automatizados por setor.",
+  "tools": ["web.search_query"],
+  "configuration_fields": [
+    { "key": "company_state", "type": "string", "description": "Estado para enquadramento legal (ex: 'SP')." },
+    { "key": "cnpj_type", "type": "string", "description": "'produto' ou 'serviço', para orientar CNAE e licenciamento." },
+    { "key": "include_legal_advice", "type": "boolean", "description": "Incluir orientação jurídica para registro e licenças (true/false)." },
+    { "key": "operation_focus", "type": "string", "description": "Foco principal da operação: 'produção', 'logística', 'distribuição' ou 'geral'", "default": "geral" },
+    { "key": "delivery_mode", "type": "string", "description": "Formato de entrega do relatório: 'pdf', 'whatsapp' ou 'markdown'", "default": "markdown" }
+  ],
+  "interactive_menu": [
+    "1) Upload do JSON com dados operacionais e/ou fluxos físicos (ex: etapas, PCCs, setores)",
+    "2) Selecione módulos de análise e geração:",
+    "   a) Workflow Diário e Semanal",
+    "   b) Matriz de Responsabilidade e Backups",
+    "   c) Checkpoints Físicos e HACCP",
+    "   d) KPIs por Setor",
+    "   e) Plano de Ação Automatizado (em caso de desvios)",
+    "   f) Regras Visuais para Mural/QR Code",
+    "   g) Fluxograma Integrado da Planta",
+    "   h) Classificação CNAE & Regulatórios",
+    "   i) Assessoramento Jurídico (opcional)",
+    "   j) Relatório Completo (todos os módulos)",
+    "3) Escolha o foco da operação (produção, logística, etc.)",
+    "4) Defina formato de entrega (markdown, pdf, whatsapp)",
+    "5) Digite 'ok' para gerar relatório operacional completo"
+  ],
+  "inputs": [
+    "extracted_process_json",
+    "company_state",
+    "cnpj_type",
+    "include_legal_advice",
+    "selected_modules",
+    "operation_focus",
+    "delivery_mode",
+    "additional_notes"
+  ],
+  "prompt_mestre": "Você é o IndustryOperationsManagerAgent, um gerente geral digital para empresas de produção no Brasil. Com base no JSON fornecido, organize as seções em Markdown, simulando um painel completo de gestão (workflow diário/semanal, matriz de responsabilidade, checkpoints HACCP, fluxograma físico, KPIs, plano de ação, mural de boas práticas). Se o campo 'operation_focus' for 'logística' ou 'distribuição', foque nos fluxos e controle de perdas. Gere um relatório completo, prático e pronto para ações imediatas. Siga os PCCs como gatilhos críticos.",
+  "output_format": "Markdown com seções e listas organizadas por setor e criticidade (pronto para mural ou apresentação).",
+  "example_prompts": [
+    "Gerar apenas os PCCs e fluxograma físico",
+    "Mostrar matriz completa com backups por setor",
+    "Análise completa de operação com foco em logística e HACCP"
+  ],
+  "validation": [
+    "extracted_process_json deve conter dados estruturados de processos",
+    "operation_focus deve ser 'produção', 'logística', 'distribuição' ou 'geral'",
+    "delivery_mode deve ser 'pdf', 'whatsapp' ou 'markdown'",
+    "selected_modules deve ser subset de ['a'..'j']",
+    "include_legal_advice boolean"
+  ]
+}

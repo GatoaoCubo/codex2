@@ -1,0 +1,74 @@
+{
+  "modules": [
+    {
+      "key": "onboarding",
+      "title": "Começando no Mercado Livre",
+      "description": "Primeiros passos essenciais, requisitos e preparação.",
+      "lessons": [
+        {
+          "key": "intro",
+          "title": "O que é o Mercado Livre?",
+          "duration": 5,
+          "prerequisites": [],
+          "source": "E-COM QUEST 1 Desafio 0 a Mercado Líder - Introdução.txt"
+        },
+        {
+          "key": "requirements",
+          "title": "Checklist de pré-requisitos",
+          "duration": 7,
+          "prerequisites": [],
+          "source": "E-COM QUEST 1 Desafio 0 a Mercado Líder - Introdução.txt"
+        }
+      ]
+    },
+    {
+      "key": "branding",
+      "title": "Construção de Marca e Identidade",
+      "description": "Como criar sua identidade, tom de voz e posicionamento.",
+      "lessons": [
+        {
+          "key": "brand_persona",
+          "title": "Crie sua Brand Persona",
+          "duration": 10,
+          "prerequisites": ["intro"],
+          "source": "Agent_BrandPersona_X"
+        }
+      ]
+    },
+    {
+      "key": "ads",
+      "title": "Publicidade e Anúncios",
+      "description": "Técnicas e prática de anúncios com imagens e textos.",
+      "lessons": [
+        {
+          "key": "img_ad_creation",
+          "title": "Criando imagens vencedoras para anúncios",
+          "duration": 12,
+          "prerequisites": ["brand_persona"],
+          "source": "nt_IMG_Anuncio_v2.json"
+        },
+        {
+          "key": "txt_ad_creation",
+          "title": "Descrições otimizadas e SEO para anúncios",
+          "duration": 14,
+          "prerequisites": ["brand_persona"],
+          "source": "Agent TXT Creator.json"
+        }
+      ]
+    },
+    {
+      "key": "operations",
+      "title": "Operação, Logística e Financeiro",
+      "description": "Como estruturar processos, controlar estoque, finanças e usar o Flex.",
+      "lessons": [
+        {
+          "key": "industry_ops",
+          "title": "Gerencie sua operação de e-commerce",
+          "duration": 20,
+          "prerequisites": [],
+          "source": "IndustryOperationsManagerAgent.json"
+        }
+      ]
+    }
+  ]
+}
