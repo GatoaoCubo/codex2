@@ -1,5 +1,5 @@
 requests
 pandas
-gspread ; extra == "sheets"
-openai ; extra == "ai"
 python-dotenv
+gspread
+openai
