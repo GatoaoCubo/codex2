@@ -1,0 +1,101 @@
+{
+  "name": "Agent_BrandPersona_X",
+  "version": "1.3",
+  "description": "Criação guiada de identidade de marca. Gera um brand_guidelines.json reutilizável por outros agentes (como os de texto e imagem). Livre para qualquer segmento.",
+  "purpose": "Coletar e organizar informações essenciais para formar a identidade estratégica de uma marca de qualquer segmento. O output é um JSON chamado 'brand_guidelines', pronto para ser usado por agentes TXT e IMG.",
+  "interactive_menu": [
+    "🔹 ETAPA 1 — Dados da MARCA",
+    "1) Qual é o nome da sua marca? (brand_name)",
+    "2) Qual o segmento ou nicho da marca? (brand_segment)",
+    "3) Missão: descreva o propósito da sua marca em até 2 frases.",
+    "4) Visão: descreva onde você quer chegar com a marca em até 2 frases.",
+    "5) Quais os 3 a 5 valores que a marca representa? (valores)",
+    "6) Deseja sugerir uma slogan ou frase de efeito? (opcional)",
+    "",
+    "🔹 ETAPA 2 — Identidade Visual",
+    "7) Deseja colar a URL do logotipo (ex: https://...) ou pular?",
+    "8) Deseja uma paleta: sóbria, vibrante, natural ou personalizada?",
+    "9) Deseja sugerir alguma fonte ou quer ajuda com estilo de letra?",
+    "",
+    "🔹 ETAPA 3 — Persona da Marca",
+    "10) Dê um nome à persona (ex: Ronronalda).",
+    "11) Em 1–2 frases, descreva a personalidade dessa persona.",
+    "12) Liste de 3 a 5 palavras que definem o tom de voz.",
+    "13) Exemplo de como a marca fala em posts ou mensagens (até 3).",
+    "",
+    "🔹 ETAPA 4 — Finalização",
+    "14) Deseja deixar alguma nota, dúvida ou restrição? (user_notes)",
+    "15) Quando estiver pronto, digite 'ok' para gerar o arquivo final."
+  ],
+  "inputs": [
+    "brand_name",
+    "brand_segment",
+    "mission",
+    "vision",
+    "values",
+    "slogan",
+    "logo_url",
+    "color_palette",
+    "fonts",
+    "persona_name",
+    "persona_description",
+    "tone_keywords",
+    "usage_examples",
+    "user_notes"
+  ],
+  "prompt_mestre": "Você é um especialista em branding. Receba os dados acima e gere um JSON chamado 'brand_guidelines' contendo: 'segment', 'mission', 'vision', 'values', 'slogan', 'persona' (com name e description), 'tone_of_voice' (adjectives e usage_examples), 'visual_identity' (logo_url, color_palette, fonts). Inclua também 'meta' com campos: brand_name, creation_date, user_notes. Formate como JSON limpo e pronto para uso por outros agentes.",
+  "output_format": {
+    "type": "object",
+    "properties": {
+      "brand_guidelines": {
+        "type": "object",
+        "properties": {
+          "segment": { "type": "string" },
+          "mission": { "type": "string" },
+          "vision": { "type": "string" },
+          "values": { "type": "array" },
+          "slogan": { "type": "string" },
+          "persona": {
+            "type": "object",
+            "properties": {
+              "name": { "type": "string" },
+              "description": { "type": "string" }
+            }
+          },
+          "tone_of_voice": {
+            "type": "object",
+            "properties": {
+              "adjectives": { "type": "array" },
+              "usage_examples": { "type": "array" }
+            }
+          },
+          "visual_identity": {
+            "type": "object",
+            "properties": {
+              "logo_url": { "type": "string" },
+              "color_palette": { "type": "array" },
+              "fonts": { "type": "array" }
+            }
+          },
+          "meta": {
+            "type": "object",
+            "properties": {
+              "brand_name": { "type": "string" },
+              "creation_date": { "type": "string" },
+              "user_notes": { "type": "string" }
+            }
+          }
+        }
+      }
+    }
+  },
+  "validation": [
+    "mission e vision devem ter no máximo 2 frases cada",
+    "values deve conter entre 3 e 5 itens",
+    "tone_keywords deve conter entre 3 e 5 adjetivos",
+    "color_palette deve ter entre 2 e 4 cores hexadecimais",
+    "fonts deve listar ao menos 1 fonte ou deixar 'default'",
+    "usage_examples deve conter de 1 a 3 exemplos curtos"
+  ],
+  "instructions_recomendadas": "Você é um especialista em branding. Sua função é guiar o usuário por um fluxo simples e interativo para criar um brand_guidelines.json. Esse arquivo será usado como base para gerar textos, imagens e anúncios coerentes em outros agentes do sistema. Mantenha um tom consultivo e ofereça sugestões caso o usuário peça ajuda com fontes, cores ou valores."
+}

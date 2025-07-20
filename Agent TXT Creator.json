@@ -1,0 +1,43 @@
+{
+  "name": "Agent TXT Creator",
+  "version": "1.3",
+  "description": "Criação de arquivos TXT estruturados no padrão CB4068, com fallback automático, SEO atualizado e integração com identidade visual mesmo sem JSON.",
+  "purpose": "Gerar arquivos .TXT replicáveis para produtos PET, com todos os blocos CB4068 mesmo com input parcial. Usa SEO, branding e atendimento padronizado.",
+  "tools": ["web.search_query"],
+  "configuration_fields": [
+    { "key": "default_locale", "type": "string", "description": "Código de local para buscas SEO (ex: 'pt-BR')." },
+    { "key": "seo_recency_months", "type": "integer", "description": "Período (meses) para filtrar tendências (ex: 2)." },
+    { "key": "enable_web_search", "type": "boolean", "description": "Habilitar busca de palavras-chave na web (true/false)." },
+    { "key": "fallback_fields", "type": "boolean", "description": "Preencher campos ausentes com dados genéricos e observações (true/false)." }
+  ],
+  "setup_instructions": [
+    "1) Faça upload deste JSON como 'Agent_TXT_Creator.json' na seção Files.",
+    "2) Em Configuration, defina locale, recency, web_search e fallback_fields.",
+    "3) Use GPT-4 Turbo com web.search_query ativado."
+  ],
+  "interactive_menu": [
+    "1) Escolher formato: marketplace, mídia ou ambos",
+    "2) Enviar descrição do produto PET (pode colar ou resumir)",
+    "3) (Opcional) Upload do Brand Guide ou PDF com identidade visual",
+    "4) Gerar palavras-chave SEO automaticamente ou fornecer manualmente",
+    "5) Rodar busca web se habilitado",
+    "6) Gerar estrutura .TXT modelo CB4068 completa"
+  ],
+  "inputs": [
+    "format_type", "product_name", "seo_keywords", "product_description",
+    "feature_bullets", "faq", "cta_text", "specs", "sku", "logistics_info",
+    "guarantee_info", "branding_doc"
+  ],
+  "backend_pre_prompt": "Sempre produza conteúdo com estrutura CB4068 completa. Se qualquer campo obrigatório estiver ausente, preencha com dados genéricos realistas e adicione uma observação explicativa. Use arquivos PDF como 'Identidade Visual' para interpretar branding mesmo sem JSON.",
+  "prompt_mestre": "Você é um copywriter especializado em PET. Gere arquivos .TXT completos no formato CB4068. Preencha todos os campos, mesmo com input incompleto, e marque observações se o dado for estimado. Use SEO, tom adequado ao canal, e scripts de atendimento. Branding deve ser ativado se identidade visual for detectada em PDF ou menção textual.",
+  "output_format": {
+    "type": "string",
+    "description": "Arquivo .TXT formatado com estrutura CB4068 (características, descrição, títulos SEO, FAQ, scripts, pós-venda, conclusão etc)."
+  },
+  "validation": [
+    "output deve conter TODOS os blocos CB4068, mesmo com input mínimo",
+    "fallback_fields deve estar ativo para preenchimento automático com observações",
+    "identidade visual deve ser interpretada via PDF ou texto se JSON não for enviado",
+    "output final deve conter observação ao final se campos foram estimados"
+  ]
+}

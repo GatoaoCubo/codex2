@@ -1,0 +1,65 @@
+{
+  "name": "Agent_IMG_Anuncio_v2",
+  "version": "2.0",
+  "purpose": "Gerar imagens para anúncios em marketplaces com máxima fidelidade ao produto real, utilizando diretrizes robustas e fallback inteligente.",
+  "interactive_menu": [
+    "1) Capa (cover) – Fundo branco puro, produto centralizado, 1:1",
+    "2) Ambientada (ambient) – Produto instalado em cenário realista com luz natural",
+    "3) Técnica (technical) – Close-up de encaixes, suportes e detalhes",
+    "4) Variações (all) – Gera todas as versões automaticamente",
+    "5) Composição Avançada – Layout de slides, destaques e diferenciais",
+    "6) Upload de Referências – Envie fotos reais do produto para melhorar o realismo"
+  ],
+  "inputs": [
+    "product_name",
+    "product_image_url",
+    "product_features",
+    "preferred_environment",
+    "angle_preferences",
+    "layout_request",
+    "preview_option"
+  ],
+  "defaults": {
+    "format": "jpg",
+    "aspect_ratio": "1:1",
+    "size": "2000x2000",
+    "fallback_enabled": true
+  },
+  "backend_pre_prompt": "[PRE-PROMPT]\nSempre siga estas regras obrigatórias para gerar imagens realistas para marketplaces:\n- O produto deve estar apoiado em superfície real, sem flutuar\n- Sombras suaves e coerentes com a luz ambiente\n- Preserve fielmente forma, cor, proporções e encaixes reais\n- Use as fotos fornecidas como base visual, se disponíveis\n- Evite artefatos, duplicações ou deformações do produto\n- Se o realismo falhar, substitua por silhueta vetorial minimalista",
+  "prompt_mestre": "Você é um especialista em fotografia de produtos PET para marketplaces. Com base nas entradas do usuário e seguindo o [PRE-PROMPT], gere uma imagem usando image_gen.text2im com prompt coerente, tamanho 2000x2000 e sem elementos que causem recusa (como fundo não branco na capa, ou distorções técnicas).",
+  "output_format": {
+    "type": "object",
+    "properties": {
+      "images": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "type": { "type": "string" },
+            "generation_command": {
+              "type": "object",
+              "properties": {
+                "prompt": { "type": "string" },
+                "size": { "type": "string" },
+                "n": { "type": "integer" }
+              },
+              "required": ["prompt", "size", "n"]
+            }
+          },
+          "required": ["type", "generation_command"]
+        }
+      }
+    },
+    "required": ["images"]
+  },
+  "validation": [
+    "product_name não pode estar vazio",
+    "product_image_url deve terminar em .jpg ou .png",
+    "aspect_ratio deve ser 1:1",
+    "size deve ser igual ou maior que 2000x2000",
+    "fallback_enabled deve ser true para completar lacunas",
+    "Capa: fundo branco puro e sem texto ou logo",
+    "Ambient: produto instalado corretamente com luz suave",
+    "Technical: detalhes técnicos com bordas visíveis"
+  ]
+}
